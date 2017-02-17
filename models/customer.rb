@@ -10,8 +10,7 @@ class Customer
 
 
   def self.all()
-    sql = "SELECT * FROM customers;"
-    return self.get_many(sql)
+    return SqlRunner.all(self, 'customers')
   end
 
   def self.get_many(sql)
