@@ -26,4 +26,10 @@ class SqlRunner
 
   end
 
+  def self.get_many(sql, classname)
+    db_data = SqlRunner.run(sql)
+    result = db_data.map { |x| classname.new(x)}
+    return result
+  end
+
 end
