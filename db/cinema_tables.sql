@@ -37,3 +37,6 @@ INSERT INTO films ( title, duration_mins) VALUES ('testing_Star Wars', 150);
 INSERT INTO films ( title, duration_mins) VALUES ('testing_Dr Strangelove, or: How I learned to stop worrying and love the bomb', 130);
 INSERT INTO films ( title, duration_mins) VALUES ('testing_The Lego Batman Movie', 92 );
 
+INSERT INTO screenings (film_id, showtime, screen, price) VALUES (1, '2017-02-21 18:00:00', 2, 6.50 );
+INSERT INTO screenings (film_id, showtime, screen, price) VALUES (2, '2017-02-21 18:00:00', 3, 6.50 );
+INSERT INTO screenings (film_id, showtime, screen, price) VALUES (3, '2017-02-21 18:00:00', 1, 6.50 );

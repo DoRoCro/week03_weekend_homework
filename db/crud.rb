@@ -1,12 +1,9 @@
 require_relative('./sql_runner.rb')
 
 class Crud
-  # def self.get_caller()
-  #   #stack overflow example how to get calling class, then can use to determine Class to return and derive table_name to query
-  #   # assuming table nameing convention Class_type => 'class_types'
-  #   self.class
-  # end
-  
+
+# # CREATE METHODS
+
   def save()                                       
   # relies on all keys being strings matching column names
   # some horrible string handling...
@@ -37,20 +34,13 @@ class Crud
     return self.class.new(db_data.first)
   end
 
-  def self.get_table_from_class()      # derive SQL tablename from Class name - assumes ruby "Class_type" => SQL "class_types" table
-    return self.to_s.downcase + "s"
-  end
+# # RETRIEVE METHODS
 
   def self.find_by_id(id)
     sql = "SELECT * FROM #{self.get_table_from_class} 
             WHERE id = #{id};"
     db_data = SqlRunner.run(sql)
     return self.new(db_data.first)
-  end
-
-  def self.all()
-    # use SqlRunner.all method generic call all(class_type, table_name) deriving table_name from Class name
-    return SqlRunner.all(self, self.to_s.downcase + "s")
   end
 
   def self.get_many(sql)
@@ -63,8 +53,26 @@ class Crud
     return self.get_many(sql)
   end
 
+
+# # UPDATE METHODS
+
+  def update()
+    sql = "UPDATE #{get_table_from_class} SET"
+    return 
+  end
+
+
+# # DELETE METHODS
+
   def self.delete_all()
     sql = "DELETE FROM #{self.get_table_from_class} ;"
     db_data = SqlRunner.run(sql)
+  end
+
+
+ # # Utility methods used by above
+
+  def self.get_table_from_class()      # derive SQL tablename from Class name - assumes ruby "Class_type" => SQL "class_types" table
+    return self.to_s.downcase + "s"
   end
 end
