@@ -15,19 +15,19 @@ CREATE TABLE films (
   duration_mins INT
 );
 
-CREATE TABLE tickets (
-  id SERIAL PRIMARY KEY,
-  customer_id INT REFERENCES customers(id) ON DELETE CASCADE,
-  film_id INT REFERENCES films(id) ON DELETE CASCADE,
-  paid DECIMAL(8,2)
-);
-
 CREATE TABLE screenings (
   id SERIAL PRIMARY KEY,
   film_id INT REFERENCES films(id) ON DELETE CASCADE,
   showtime TIMESTAMP,
   screen INT2,
   price DECIMAL(8,2)
+);
+
+CREATE TABLE tickets (
+  id SERIAL PRIMARY KEY,
+  customer_id INT REFERENCES customers(id) ON DELETE CASCADE,
+  screening_id INT REFERENCES screenings(id) ON DELETE CASCADE,
+  paid DECIMAL(8,2)
 );
 
 INSERT INTO customers ( name, funds ) VALUES ('testing_A Smith', 123.45);
