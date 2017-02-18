@@ -12,5 +12,10 @@ customer4 = Customer.new({
   'funds' => 543.21
   })
 customer4.save
+film4 = Film.new({
+  'title' => "testing_La La LaLa Land",
+  'duration_mins' => 140
+  })
+film4.save
 
 nil

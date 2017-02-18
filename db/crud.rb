@@ -32,10 +32,10 @@ class Crud
         values_list += instance_variable_get(x).to_s + ", "
       end
     end
-    table_fields.chop!.chop!
-    values_list.chop!.chop!
+    table_fields.chop!.chop!        # strip trailing comma from string
+    values_list.chop!.chop!         # strip trailing comma from string
     
-    sql = "INSERT INTO #{table_name} ( #{table_fields}) VALUES (#{values_list}) RETURNING id ;"
+    sql = "INSERT INTO #{table_name} ( #{table_fields}) VALUES (#{values_list}) RETURNING * ;"
     db_data = SqlRunner.run(sql)
     return self.class.new(db_data.first)
 
