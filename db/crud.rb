@@ -7,10 +7,6 @@ class Crud
   #   self.class
   # end
   
-  def self.get_table_from_class()
-    return self.to_s.downcase + "s"
-  end
-
   def save()                                       
   # relies on all keys being strings matching column names
   # some horrible string handling...
@@ -34,11 +30,14 @@ class Crud
     end
     table_fields.chop!.chop!        # strip trailing comma from string
     values_list.chop!.chop!         # strip trailing comma from string
-    
+    # create and run SQL string 
     sql = "INSERT INTO #{table_name} ( #{table_fields}) VALUES (#{values_list}) RETURNING * ;"
     db_data = SqlRunner.run(sql)
     return self.class.new(db_data.first)
+  end
 
+  def self.get_table_from_class()      # derive SQL tablename from Class name - assumes ruby "Class_type" => SQL "class_types" table
+    return self.to_s.downcase + "s"
   end
 
   def self.find_by_id(id)
@@ -56,5 +55,10 @@ class Crud
   def self.get_many(sql)
     # get_many method uses SqlRunnner equivalent passing required return class as parameter
     return SqlRunner.get_many(sql, self)
+  end
+
+  def self.delete_all()
+    sql = "DELETE FROM #{self.get_table_from_class} ;"
+    db_data = SqlRunner.run(sql)
   end
 end
