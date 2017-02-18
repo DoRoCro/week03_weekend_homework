@@ -2,6 +2,7 @@ require('pry')
 require_relative('models/customer.rb')
 require_relative('models/film.rb')
 require_relative('models/screening.rb')
+require_relative('models/ticket.rb')
 
 customers = Customer.all
 films = Film.all
@@ -28,9 +29,8 @@ customer4.change_name("Zaphod Beeblebrox")
 customer4.update
 a_film.change_title("testing_STAR WARS")
 a_film.update
-#a_screening.id = nil
 binding.pry
-# a_screening.save  # as a new screening - doesn't work as id defined creates primary key conflict...
+tickets = Ticket.all()
 
 
 #Film.delete_all
