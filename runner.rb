@@ -7,4 +7,10 @@ films = Film.all
 a_customer = Customer.find_by_id( customers[0].id )
 a_film = Film.find_by_id( films[0].id )
 binding.pry
+customer4 = Customer.new({
+  'name' => "D Davies",
+  'funds' => 543.21
+  })
+customer4.save
+
 nil
