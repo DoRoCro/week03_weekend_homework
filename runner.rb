@@ -4,6 +4,7 @@ require_relative('models/film.rb')
 
 customers = Customer.all
 films = Film.all
+binding.pry
 a_customer = Customer.find_by_id( customers[0].id )
 a_film = Film.find_by_id( films[0].id )
 customer4 = Customer.new({
@@ -16,7 +17,6 @@ film4 = Film.new({
   'duration_mins' => 140
   })
 film4.save
-binding.pry
 Film.delete_all
 Customer.delete_all
 

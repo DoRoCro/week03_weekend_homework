@@ -33,6 +33,7 @@ class Crud
     # create and run SQL string 
     sql = "INSERT INTO #{table_name} ( #{table_fields}) VALUES (#{values_list}) RETURNING * ;"
     db_data = SqlRunner.run(sql)
+    @id = db_data.first['id'].to_i
     return self.class.new(db_data.first)
   end
 
@@ -53,8 +54,13 @@ class Crud
   end
 
   def self.get_many(sql)
-    # get_many method uses SqlRunnner equivalent passing required return class as parameter
-    return SqlRunner.get_many(sql, self)
+    result = SqlRunner.run(sql).map { |x| self.new(x)}
+    return result
+  end
+
+  def self.all()
+    sql = "SELECT * FROM #{self.get_table_from_class};"
+    return self.get_many(sql)
   end
 
   def self.delete_all()

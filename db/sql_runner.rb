@@ -26,15 +26,6 @@ class SqlRunner
 
   end
 
-  def self.get_many(sql, class_type)
-    db_data = SqlRunner.run(sql)
-    result = db_data.map { |x| class_type.new(x)}
-    return result
-  end
-
-  def self.all(class_type, table_name)
-    sql = "SELECT * FROM #{table_name};"
-    return self.get_many(sql, class_type)
-  end
+  
 
 end
