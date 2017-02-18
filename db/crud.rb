@@ -7,28 +7,9 @@ class Crud
   def save()                                       
   # relies on all keys being strings matching column names
   # some horrible string handling...
-    table_name = self.class.get_table_from_class
-    variables = self.instance_variables           #returns array of symbols of form :@varname
-    table_fields = ""
-    values_list = ""
-    variables.each do |x| 
-      table_fields += x.to_s.delete("@") + ", " 
-      # case instance_variable_get(x).class
-      # when 'String'                                                      # this doesn't work even though in pry
-      #   values_list += "'" + instance_variable_get(x).to_s + "', "       # instance_variable_get(x).class === 'String' is true...
-      # else
-      #   values_list += instance_variable_get(x).to_s + ", "
-      # end
-      if instance_variable_get(x).class == String
-        values_list += "'" + instance_variable_get(x).to_s + "', "
-      else
-        values_list += instance_variable_get(x).to_s + ", "
-      end
-    end
-    table_fields.chop!.chop!        # strip trailing comma from string
-    values_list.chop!.chop!         # strip trailing comma from string
+   
     # create and run SQL string 
-    sql = "INSERT INTO #{table_name} ( #{table_fields}) VALUES (#{values_list}) RETURNING * ;"
+    sql = "INSERT INTO #{self.get_table_from_class} ( #{self.get_table_fields}) VALUES (#{self.get_values_list}) RETURNING * ;"
     db_data = SqlRunner.run(sql)
     @id = db_data.first['id'].to_i
     return self.class.new(db_data.first)
@@ -74,5 +55,34 @@ class Crud
 
   def self.get_table_from_class()      # derive SQL tablename from Class name - assumes ruby "Class_type" => SQL "class_types" table
     return self.to_s.downcase + "s"
+  end
+
+  def self.get_table_fields
+    table_fields = ""
+    variables = self.instance_variables      
+    variables.each do |x| 
+      table_fields += x.to_s.delete("@") + ", " 
+    end
+    return table_fields.chop!.chop!        # strip trailing comma from string
+  end
+
+  def self.get_values_list()
+    variables = self.instance_variables           #returns array of symbols of form :@varname
+    values_list = ""
+    variables.each do |x| 
+      # case instance_variable_get(x).class
+      # when 'String'                                                      # this doesn't work even though in pry
+      #   values_list += "'" + instance_variable_get(x).to_s + "', "       # instance_variable_get(x).class === 'String' is true...
+      # else
+      #   values_list += instance_variable_get(x).to_s + ", "
+      # end
+      if instance_variable_get(x).class == String
+        values_list += "'" + instance_variable_get(x).to_s + "', "
+      else
+        values_list += instance_variable_get(x).to_s + ", "
+      end
+    end
+    table_fields.chop!.chop!        # strip trailing comma from string
+    values_list.chop!.chop!         # strip trailing comma from string
   end
 end
