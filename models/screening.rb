@@ -1,8 +1,8 @@
 require_relative('./film.rb')
 class Screening < Crud
 
-  attr_reader   :id, :film_id, :price
-  attr_accessor :showtime
+  attr_reader   :id, :film_id
+  attr_accessor :showtime ,:price
 
   def initialize( options )
     @id = options['id'].to_i if options['id']

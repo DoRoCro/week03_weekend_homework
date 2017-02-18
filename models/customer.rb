@@ -10,4 +10,9 @@ class Customer < Crud
     @funds = options['funds']
   end
 
+  def change_name(newname)
+    oldname = @name
+    @name = newname
+    return oldname
+  end
 end

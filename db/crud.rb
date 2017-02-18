@@ -9,7 +9,9 @@ class Crud
   # some horrible string handling...
    
     # create and run SQL string 
-    sql = "INSERT INTO #{self.get_table_from_class} ( #{self.get_table_fields}) VALUES (#{self.get_values_list}) RETURNING * ;"
+    sql = "INSERT INTO #{self.class.get_table_from_class} 
+      ( #{self.get_table_fields}) 
+      VALUES (#{self.get_values_list}) RETURNING * ;"
     db_data = SqlRunner.run(sql)
     @id = db_data.first['id'].to_i
     return self.class.new(db_data.first)
@@ -38,7 +40,11 @@ class Crud
 # # UPDATE METHODS
 
   def update()
-    sql = "UPDATE #{get_table_from_class} SET"
+    sql = "UPDATE #{self.class.get_table_from_class} SET 
+            ( #{self.get_table_fields} )
+             = ( #{self.get_values_list} )
+             WHERE id = #{@id} ; "
+    result = SqlRunner.run(sql)
     return 
   end
 
@@ -57,17 +63,17 @@ class Crud
     return self.to_s.downcase + "s"
   end
 
-  def self.get_table_fields
+  def get_table_fields()              # derive table column names from object instance varaible names
     table_fields = ""
     variables = self.instance_variables      
     variables.each do |x| 
       table_fields += x.to_s.delete("@") + ", " 
     end
-    return table_fields.chop!.chop!        # strip trailing comma from string
+    return table_fields.chop!.chop!   # strip trailing comma from string
   end
 
-  def self.get_values_list()
-    variables = self.instance_variables           #returns array of symbols of form :@varname
+  def get_values_list() 
+    variables = self.instance_variables     #returns array of symbols of form :@varname
     values_list = ""
     variables.each do |x| 
       # case instance_variable_get(x).class
@@ -82,7 +88,6 @@ class Crud
         values_list += instance_variable_get(x).to_s + ", "
       end
     end
-    table_fields.chop!.chop!        # strip trailing comma from string
     values_list.chop!.chop!         # strip trailing comma from string
   end
 end

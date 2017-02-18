@@ -21,6 +21,13 @@ film4.save
 screenings = Screening.all
 a_screening = Screening.find_by_id(1)
 a_screening.showtime = "2017-02-21 21:00:00"
+a_screening.update
+a_screening.price = 6.75
+a_screening.update
+customer4.change_name("Zaphod Beeblebrox")
+customer4.update
+a_film.change_title("testing_STAR WARS")
+a_film.update
 #a_screening.id = nil
 binding.pry
 # a_screening.save  # as a new screening - doesn't work as id defined creates primary key conflict...
