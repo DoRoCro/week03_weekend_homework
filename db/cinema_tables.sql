@@ -18,7 +18,8 @@ CREATE TABLE films (
 CREATE TABLE tickets (
   id SERIAL PRIMARY KEY,
   customer_id INT REFERENCES customers(id) ON DELETE CASCADE,
-  film_id INT REFERENCES films(id) ON DELETE CASCADE
+  film_id INT REFERENCES films(id) ON DELETE CASCADE,
+  paid DECIMAL(8,2)
 );
 
 CREATE TABLE screenings (
@@ -40,3 +41,7 @@ INSERT INTO films ( title, duration_mins) VALUES ('testing_The Lego Batman Movie
 INSERT INTO screenings (film_id, showtime, screen, price) VALUES (1, '2017-02-21 18:00:00', 2, 6.50 );
 INSERT INTO screenings (film_id, showtime, screen, price) VALUES (2, '2017-02-21 18:00:00', 3, 6.50 );
 INSERT INTO screenings (film_id, showtime, screen, price) VALUES (3, '2017-02-21 18:00:00', 1, 6.50 );
+
+INSERT INTO tickets (screening_id, customer_id, paid) VALUES (1, 1, 6.50 );
+INSERT INTO tickets (screening_id, customer_id, paid) VALUES (2, 2, 6.50 );
+INSERT INTO tickets (screening_id, customer_id, paid) VALUES (3, 3, 6.50 );
