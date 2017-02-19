@@ -36,14 +36,20 @@ tickets.each do |ticket|
 end
 
 binding.pry
-deleted = tickets[0].delete
+deleted = tickets[0].delete    # fails when no tickets in database
 
 tickets = Ticket.all()
-puts "After deleting first ticket " + deleted.id.to_s
+puts "After deleting first ticket id = " + deleted.id.to_s
 tickets.each do |ticket|
   puts ticket.customer.name + " goes to screening at " + ticket.screening.showtime + " to see "+ ticket.film.title + " having paid " + ticket.paid.to_s + "on ticket id = " + ticket.id.to_s
 end
-
+new_tickets = customer4.buys_tickets(a_screening, 4)
+puts "#{customer4.name} bought #{new_tickets.count.to_s} to #{new_tickets.first.screening.film.title} "
+sum_paid = 0.0
+new_tickets.each do |t| 
+  sum_paid += t.paid.to_f
+end
+puts "and paid £#{sum_paid}"
 
 
 #Film.delete_all

@@ -43,5 +43,14 @@ INSERT INTO screenings (film_id, showtime, screen, price) VALUES (2, '2017-02-21
 INSERT INTO screenings (film_id, showtime, screen, price) VALUES (3, '2017-02-21 18:00:00', 1, 6.50 );
 
 INSERT INTO tickets (screening_id, customer_id, paid) VALUES (1, 1, 6.50 );
+INSERT INTO tickets (screening_id, customer_id, paid) VALUES (1, 1, 6.50 );
+INSERT INTO tickets (screening_id, customer_id, paid) VALUES (1, 1, 6.50 );
 INSERT INTO tickets (screening_id, customer_id, paid) VALUES (2, 2, 6.50 );
+INSERT INTO tickets (screening_id, customer_id, paid) VALUES (2, 2, 6.50 );
+INSERT INTO tickets (screening_id, customer_id, paid) VALUES (3, 3, 6.50 );
+INSERT INTO tickets (screening_id, customer_id, paid) VALUES (3, 3, 6.50 );
+INSERT INTO tickets (screening_id, customer_id, paid) VALUES (3, 3, 6.50 );
+INSERT INTO tickets (screening_id, customer_id, paid) VALUES (3, 3, 6.50 );
+INSERT INTO tickets (screening_id, customer_id, paid) VALUES (3, 3, 6.50 );
+INSERT INTO tickets (screening_id, customer_id, paid) VALUES (3, 3, 6.50 );
 INSERT INTO tickets (screening_id, customer_id, paid) VALUES (3, 3, 6.50 );

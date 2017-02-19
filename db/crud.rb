@@ -2,6 +2,9 @@ require_relative('./sql_runner.rb')
 
 class Crud
 
+# # Future enhancement
+    # put table creation code into here so can dreate tables based on ruby objects??
+
 # # CREATE METHODS
 
   def save()                                       
