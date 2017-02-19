@@ -68,10 +68,20 @@ class Crud
               ON tickets.screening_id = screenings.id
               INNER JOIN customers
               ON tickets.customer_id = customers.id
-              WHERE films.id = #{@id}"
+              WHERE f.id = #{@id}"
       return Customer.get_many(sql)
     end    
 
+  def most_popular_screening()
+    sql = "SELECT s.*  FROM tickets t
+          INNER JOIN screenings s
+          ON s.id = t.screening_id
+          INNER JOIN films f
+          ON f.id = s.film_id
+          WHERE f.id = #{@id}
+          GROUP BY s.id ORDER BY count(*) DESC ;"
+    return Screening.get_many(sql).first
+  end
 
 # # UPDATE METHODS
 

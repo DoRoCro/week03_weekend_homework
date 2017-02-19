@@ -20,4 +20,9 @@ class Film < Crud
     return self.customers_for_film()
   end
 
+  def most_tickets()
+    return self.most_popular_screening
+  end
+
+
 end

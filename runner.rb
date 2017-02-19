@@ -91,6 +91,10 @@ customer4.tickets.each do |ticket|
   puts "#{ticket.screening.showtime} to see #{ticket.screening.film.title}"
 end
 
+# Test most popular screening method
+binding.pry
+puts "Most popular screening for #{Film.find_by_id(3).title} is #{Film.find_by_id(3).most_tickets.showtime}"
+
 # Test delete_all method
 puts
 puts "testing delete_all Films and Customers cascades to tickets and screenings"
@@ -103,5 +107,4 @@ puts "Tickets in database = #{Ticket.all.count}"
 puts "Screenings available = #{Screening.all.count}"
 
 puts "Remember to re-initialise database with data or some methods fail..."
-binding.pry
 nil
