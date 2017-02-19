@@ -43,6 +43,7 @@ puts "After deleting first ticket id = " + deleted.id.to_s
 tickets.each do |ticket|
   puts ticket.customer.name + " goes to screening at " + ticket.screening.showtime + " to see "+ ticket.film.title + " having paid " + ticket.paid.to_s + "on ticket id = " + ticket.id.to_s
 end
+puts "Customer #{customer4.name} has £#{customer4.funds}"
 new_tickets = customer4.buys_tickets(a_screening, 4)
 puts "#{customer4.name} bought #{new_tickets.count.to_s} to #{new_tickets.first.screening.film.title} "
 sum_paid = 0.0
@@ -50,6 +51,8 @@ new_tickets.each do |t|
   sum_paid += t.paid.to_f
 end
 puts "and paid £#{sum_paid}"
+puts "leaving £#{customer4.funds}"
+
 
 
 #Film.delete_all
