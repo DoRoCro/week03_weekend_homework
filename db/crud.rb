@@ -44,6 +44,13 @@ class Crud
     return Ticket.get_many(sql)
   end
 
+  def tickets_for_screening()
+    sql = "SELECT tickets.* FROM tickets 
+          INNER JOIN screenings
+          ON tickets.screening_id WHERE tickets.screening_id = #{@id} ;"
+    return Ticket.get_many(sql)
+  end
+
 
 # # UPDATE METHODS
 

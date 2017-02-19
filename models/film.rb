@@ -16,5 +16,8 @@ class Film < Crud
     return old_title
   end
 
+  def customers
+    return self.customers_for_film()
+  end
 
 end
