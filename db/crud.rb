@@ -39,6 +39,11 @@ class Crud
     return self.get_many(sql)
   end
 
+  def tickets_for_customer()
+    sql = "SELECT * FROM tickets WHERE customer_id = #{@id} ; "
+    return Ticket.get_many(sql)
+  end
+
 
 # # UPDATE METHODS
 

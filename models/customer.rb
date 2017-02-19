@@ -30,5 +30,9 @@ class Customer < Crud
     return tickets
   end
 
+  def tickets()
+    return self.tickets_for_customer
+  end
+
 
 end
