@@ -4,6 +4,11 @@ require_relative('models/film.rb')
 require_relative('models/screening.rb')
 require_relative('models/ticket.rb')
 
+if system('db/initialise.sh')
+else
+  puts "Remember to re-initialise database with data or some methods fail..."
+end
+
 customers = Customer.all
 films = Film.all
 a_customer = Customer.find_by_id( customers[0].id )
@@ -57,7 +62,12 @@ new_tickets.each do |t|
 end
 puts "and paid £#{sum_paid}"
 puts "leaving £#{customer4.funds}"
-
+puts
+total_income = 0.0
+Ticket.all.each do |t|
+  total_income += t.paid.to_f
+end
+puts "Total cinema revenue to date = #{total_income}"
 puts
 
 # Test tickets() method against customer object
@@ -71,12 +81,24 @@ films.each do |film|
     puts " #{customer.name}; "
   end
 end
+
+# Test tickets for customer
+puts "#{customer4.name} has  #{customer4.tickets.count}"
+customer4.tickets.each do |ticket|
+  puts "#{ticket.screening.showtime} to see #{ticket.screening.film.title}"
+end
+
+# Test delete_all method
+puts
+puts "testing delete_all Films and Customers cascades to tickets and screenings"
+puts "Tickets in database = #{Ticket.all.count}"
+puts "Screenings available = #{Screening.all.count}"
+Film.delete_all
+Customer.delete_all
+puts "after delete_all:"
+puts "Tickets in database = #{Ticket.all.count}"
+puts "Screenings available = #{Screening.all.count}"
+
+puts "Remember to re-initialise database with data or some methods fail..."
 binding.pry
-
-#Film.delete_all
-#Customer.delete_all
-
-
-
-
 nil
