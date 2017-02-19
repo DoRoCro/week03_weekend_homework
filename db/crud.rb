@@ -57,7 +57,8 @@ class Crud
   end
 
   def delete()
-    sql = "DELETE FROM #{self.get_table_from_class} WHERE id = #{@id} ;"
+    sql = "DELETE FROM #{self.class.get_table_from_class} WHERE id = #{@id} RETURNING * ;"
+    return self.class.new(SqlRunner.run(sql).first)
   end
 
  # # Utility methods used by above

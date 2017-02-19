@@ -29,10 +29,20 @@ customer4.change_name("testing_Zaphod Beeblebrox")
 customer4.update
 a_film.change_title("testing_STAR WARS")
 a_film.update
+
 tickets = Ticket.all()
+tickets.each do |ticket|
+  puts ticket.customer.name + " goes to screening at " + ticket.screening.showtime + " to see "+ ticket.film.title + " having paid " + ticket.paid.to_s
+end
 
 binding.pry
-puts tickets[0].customer.name + " goes to screening at " + tickets[0].screening.showtime + " to see "+ tickets[0].film.title + " having paid " + tickets[0].paid.to_s
+deleted = tickets[0].delete
+
+tickets = Ticket.all()
+puts "After deleting first ticket " + deleted.id.to_s
+tickets.each do |ticket|
+  puts ticket.customer.name + " goes to screening at " + ticket.screening.showtime + " to see "+ ticket.film.title + " having paid " + ticket.paid.to_s + "on ticket id = " + ticket.id.to_s
+end
 
 
 
