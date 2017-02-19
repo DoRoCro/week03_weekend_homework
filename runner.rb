@@ -9,10 +9,13 @@ else
   puts "Remember to re-initialise database with data or some methods fail..."
 end
 
+# Test initial retrieve methods
 customers = Customer.all
 films = Film.all
 a_customer = Customer.find_by_id( customers[0].id )
 a_film = Film.find_by_id( films[0].id )
+
+# Test Create methods
 customer4 = Customer.new({
   'name' => "testing_D Davies",
   'funds' => 543.21
@@ -24,7 +27,7 @@ film4 = Film.new({
   })
 film4.save
 
-#  Test all() method on existing data
+#  Test all() method on existing data after adding Screening class
 screenings = Screening.all
 a_screening = Screening.find_by_id(1)
 
