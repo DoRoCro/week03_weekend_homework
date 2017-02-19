@@ -92,8 +92,18 @@ customer4.tickets.each do |ticket|
 end
 
 # Test most popular screening method
-binding.pry
 puts "Most popular screening for #{Film.find_by_id(3).title} is #{Film.find_by_id(3).most_tickets.showtime}"
+
+# binding.pry
+# Test tickets limit (default 10)
+puts "Screening #{a_screening.showtime} for #{a_screening.film.title} has #{a_screening.tickets.count} tickets sold with #{a_screening.max_tickets} as limit"
+puts "trying to buy another 20 tickets..."
+tickets_bought = 0
+while a_screening.tickets.count < a_screening.max_tickets
+  tickets_bought += 1
+  customer4.buys_tickets(a_screening, 1) 
+end
+puts "tried to buy tickets for #{a_screening.showtime} for #{a_screening.film.title}, bought #{tickets_bought}"
 
 # Test delete_all method
 puts

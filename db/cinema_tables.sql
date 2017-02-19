@@ -20,7 +20,8 @@ CREATE TABLE screenings (
   film_id INT REFERENCES films(id) ON DELETE CASCADE,
   showtime TIMESTAMP,
   screen INT2,
-  price DECIMAL(8,2)
+  price DECIMAL(8,2),
+  max_tickets INT2 DEFAULT 10
 );
 
 CREATE TABLE tickets (
