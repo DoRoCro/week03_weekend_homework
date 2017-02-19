@@ -59,12 +59,19 @@ puts "and paid £#{sum_paid}"
 puts "leaving £#{customer4.funds}"
 
 puts
-# Test .tickets() method against customer object
 
-binding.pry
+# Test tickets() method against customer object
 puts "#{customer4.name} has #{customer4.tickets.count} tickets"
 
-
+# Test customers_for_film() method against films
+films = Film.all()
+films.each do |film|
+  puts "Film #{film.title} has customer list: "
+  film.customers.each do |customer|
+    puts " #{customer.name}; "
+  end
+end
+binding.pry
 
 #Film.delete_all
 #Customer.delete_all

@@ -30,8 +30,15 @@ class Crud
   end
 
   def self.get_many(sql)
-    result = SqlRunner.run(sql).map { |x| self.new(x)}
+    # result = SqlRunner.run(sql).map { |x| self.new(x)}   # fails if none found
+    db_data = SqlRunner.run(sql)
+    if db_data
+      result = db_data.map { |x| self.new(x)}   # fails if none found
     return result
+    else
+    return []
+    end
+
   end
 
   def self.all()
@@ -47,9 +54,23 @@ class Crud
   def tickets_for_screening()
     sql = "SELECT tickets.* FROM tickets 
           INNER JOIN screenings
-          ON tickets.screening_id WHERE tickets.screening_id = #{@id} ;"
+          ON tickets.screening_id = screenings.id
+          WHERE tickets.screening_id = #{@id} ;"
     return Ticket.get_many(sql)
   end
+
+  def customers_for_film()
+    #needs 1 - screenings for film , 2 - tickets for screenings, 3 - customers for tickets
+      sql = "SELECT DISTINCT customers.* FROM screenings 
+              INNER JOIN films
+              ON screenings.film_id = films.id
+              INNER JOIN tickets
+              ON tickets.screening_id = screenings.id
+              INNER JOIN customers
+              ON tickets.customer_id = customers.id
+              WHERE films.id = #{@id}"
+      return Customer.get_many(sql)
+    end    
 
 
 # # UPDATE METHODS
