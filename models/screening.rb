@@ -11,6 +11,11 @@ class Screening < Crud
     @price = options['price']
   end
 
+  def film()
+    return Film.find_by_id(@film_id)
+  end
+
+  
 
 
 end

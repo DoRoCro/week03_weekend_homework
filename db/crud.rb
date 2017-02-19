@@ -56,6 +56,9 @@ class Crud
     db_data = SqlRunner.run(sql)
   end
 
+  def delete()
+    sql = "DELETE FROM #{self.get_table_from_class} WHERE id = #{@id} ;"
+  end
 
  # # Utility methods used by above
 

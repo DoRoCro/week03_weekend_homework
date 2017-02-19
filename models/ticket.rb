@@ -17,5 +17,16 @@ class Ticket < Crud
     return old_customer_id
   end
 
+  def screening
+    return Screening.find_by_id(@screening_id)
+  end
+
+  def customer
+    return Customer.find_by_id(@customer_id)
+  end
+
+  def film
+    self.screening.film
+  end
 
 end
